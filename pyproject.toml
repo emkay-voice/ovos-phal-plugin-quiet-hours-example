@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ovos-phal-plugin-quiet-hours-example"
+version = "0.1.0"
+description = "Quiet hours: an OpenVoiceOS PHAL plugin that turns the voice down in the evening and back up in the morning"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+authors = [{name = "emkay-voice"}]
+requires-python = ">=3.10"
+keywords = ["ovos", "openvoiceos", "phal", "plugin", "emkay"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+]
+# what the plugin needs besides OpenVoiceOS itself; Emkay installs these too
+dependencies = [
+    "ovos-plugin-manager",
+    "ovos-bus-client",
+]
+
+[project.optional-dependencies]
+test = ["pytest", "ovos-utils"]
+
+[project.urls]
+Homepage = "https://github.com/emkay-voice/ovos-phal-plugin-quiet-hours-example"
+
+# how OpenVoiceOS finds the plugin: "<plugin name>" = "<package>:<class>"
+[project.entry-points."opm.phal"]
+"ovos-phal-plugin-quiet-hours-example" = "ovos_phal_plugin_quiet_hours_example:QuietHoursPlugin"
+
+[tool.setuptools]
+packages = ["ovos_phal_plugin_quiet_hours_example"]
+
+[tool.pytest.ini_options]
+addopts = "--import-mode=importlib"
+testpaths = ["tests"]
